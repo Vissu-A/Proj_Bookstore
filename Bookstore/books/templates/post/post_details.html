@@ -1,0 +1,72 @@
+{% extends 'home.html' %}
+{% load static %}
+
+  <div class="container-fluid">
+
+    {% block content %}
+    
+    <div class="row" id="msg">
+
+        {% if messages %}
+  
+          {% for message in messages %}
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ message }}
+            </div>
+
+          {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="{{post.img.url}}" alt="" style="width: 250px; height: 250px;">
+        </div>
+
+        <div class="col-sm-4">
+          <h3><strong>{{post.title}}</strong></h3>
+          <h5>{{post.description}}</h5>
+          <p class="text"><strong>&nbsp₹</strong>&nbsp{{post.price}}</p>
+          <p class="text">{{post.timestamp}}</p>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="pull-right">
+            <h3>Posted by</h3>
+            <p><strong>{{user_obj.full_name}}</strong> on <strong>{{post.timestamp}}</strong></p>
+            <img src="{{user_obj.img.url}}" class="rounded-circle z-depth-0" alt="" height="75"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <br><br>
+      </div>
+
+      <div class="row" id="comments-div">
+        {% include 'post/comments.html' %}
+      </div>
+
+    </div>
+
+    {% endblock %}
+
+  </div>
+
+</body>
+
+<script>
+  setTimeout(function(){
+      if ($('#msg').length > 0){
+          $('#msg').remove();
+      }
+  }, 5000)
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+{% extends 'home.html' %}
+{% load static %}
+
+  <div class="container-fluid">
+
+    {% block content %}
+
+    <div class="container-fluid">
+        <div class="col-sm-3">
+
+        </div>
+
+        <div class="col-sm-9">
+          <div class="row">
+            {% for post in data %}
+              <div class="col-sm-4">
+                <div class="card" style="width: 27.5rem; box-shadow: 5px 5px 5px 5px grey; border-radius: 4px;">
+                  
+                  <a href="{{ post.get_absolute_url }}"><img class="card-img-top" src="{{post.img.url}}" alt="{{post.title}}" style="width: 27.5rem; height: 27.5rem;"></a>
+                
+                  <div class="card-body">
+                    <a href="{{ post.get_absolute_url }}"><h3 class="card-title"><strong>&nbsp {{post.title}}</strong></h3></a>
+                    <p class="card-text">&nbsp{{post.description}}</p>
+                  </div>
+               
+                  <div class="card-footer">
+                    <p class="card-text"><strong>&nbsp₹</strong>&nbsp{{post.price}}</p>
+                  </div><br>
+      
+                </div><br><br><br>
+              </div>
+            {% endfor %}
+          </div> 
+
+        </div>
+
+      </div>
+      
+    {% endblock %}
+
+  </div>
+
+</body>
+
+<script>
+  setTimeout(function(){
+      if ($('#msg').length > 0){
+          $('#msg').remove();
+      }
+  }, 5000)
+</script>
+
+</html>

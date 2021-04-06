@@ -1,0 +1,72 @@
+{% extends 'home.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-fluid">
+    
+    <div class="row" id="msg">
+
+        {% if messages %}
+    
+        {% for message in messages %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+        
+        <div class="col-sm-3">
+
+            <div class="container" style="width: 250px; height: 250px">
+
+                {% if user.img == '' %}
+
+                <div class="container" style="width: 213px; height: 223px;">
+                    <img class="card-img-top" src="http://127.0.0.1:8000/media/dummy_profile.png" alt="Card image" style="width: 204px; height: 214px;">
+                </div>
+
+                {% else %}
+
+                <div class="container" style="width: 213px; height: 223px;">
+                    <img class="card-img-top" src="{{user.img.url}}" alt="Card image" style="width: 204px; height: 214px;">
+                </div>
+                
+                {% endif %}
+
+            </div>
+            
+        </div><br><br>
+
+        <div class="col-sm-7">
+        
+            <form action="">
+                {{form|crispy}}
+            </form>
+            
+            {% if edit %}
+            <a class="btn btn-primary btn-md btn-block pull-right" href="{% url 'user-edit-path'%}">Edit</a><br><br><br><br>
+            {% endif %}
+        </div>
+    
+    </div>
+
+</div>
+
+<script>
+    setTimeout(function(){
+        if ($('#msg').length > 0){
+            $('#msg').remove();
+        }
+    }, 5000)
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'home.html' %}
+
+{% load socialaccount %}
+{% providers_media_js %}
+
+
+{% block content %}
+
+<div class="row" id="msg">
+
+    {% if messages %}
+
+      {% for message in messages %}
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+
+      {% endfor %}
+
+    {% endif %}
+
+</div>
+
+<div class="container">
+
+    <div class="col-lg-4">
+
+    </div>
+    
+    <div class="col-lg-4">
+
+        <div class="container-fluid">
+
+        </div><br><br><br><br><br><br>
+
+        <div class="container-fluid" style="background-color: springgreen; box-shadow: 5px 5px 7px 7px grey; border-radius: 4px;">
+
+            <div class="container-fluid">
+                <h3><strong><p class="text-center">Log Into Bookstore</p></strong></h3>
+            </div><br>
+    
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+            {% endif %}
+            
+    
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}" />
+                
+                {% for field in form %}
+    
+                {% if field.errors %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{ field.label }}</label>
+    
+                    <div class="control">
+                        {{ field }}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                            <li><strong style="color: red;">{{ error }}</strong></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+    
+                {% else %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{field.label}}</label>
+    
+                    <div class="control">   
+                        {{field}}
+                    </div>
+    
+                </div>
+    
+                {% endif %}
+    
+                {% endfor %}
+                
+                <div class="container-fluid">
+                    <button type="submit" class="form-control btn btn-primary" id="id_login">LogIn</button><br><br>
+                    <a class='form-control btn btn-warning' id="id_login" href="{% provider_login_url 'google' %}">Continue with Google</a><br><br>
+                    <a class='form-control btn btn-info' id="id_login" href="{% provider_login_url 'facebook' method='oauth2' %}">Continue with Facebook</a>
+                </div><br>
+    
+                <div class="container-fluid">
+                    New to Bookstore? <a href="{% url 'user-signup-path'%}">Sign-up</a>
+                </div><br>
+                <div class="container-fluid">
+                    Forgot password? <a href="{% url 'password_reset' %}">Reset Passcode</a>
+                </div><br>
+                
+            </form>
+    
+        </div>
+
+        </div> 
+
+    <div class="col-lg-4">
+
+    </div>
+
+       
+</div>
+
+
+{% endblock %}

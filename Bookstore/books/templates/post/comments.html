@@ -1,0 +1,103 @@
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="panel-group">
+
+    <div class="panel panel-success">
+        
+        <div class="panel-heading">
+            <h4>
+                {% if comments.count == 1 %}
+                <strong>
+                    {{ comments|length }} Comment
+                </strong>
+                {% else %}
+                <strong>
+                    {{ comments|length }} comments
+                </strong>
+                {% endif %}
+            </h4>
+        </div>
+
+        <div class="panel-body" style="overflow-y: scroll; overflow-x: scroll;">
+            {% for comment in comments %}
+            <div class="panel-group">
+                
+                <div class="panel panel-info">
+                    
+                    <div class="panel-heading">
+                        <a href="{% url 'email-user-info' comment.user.email %}">
+                            <p class="text-primary">{{comment.user.email}}</p>
+                        </a>
+                    </div>
+    
+                    <div class="panel-body">
+                        <p><strong>{{comment}}</strong></p>
+                    </div>
+    
+                    <div class="panel-footer">
+                        <div id="likes-count">{{ comment.liked.all | length }}</div>
+                        
+                        {% if request.user in comment.liked.all %}
+                        <input type="hidden" name="comment-id" value="{{ comment.id }}">
+                        <input type="button" value="Unike" class="btn-primary" id="like-btn">
+                        <input type="button" value="Reply" class="btn-danger" id="reply-btn">
+                        {% else %}
+                        <input type="hidden" name="comment-id" value="{{ comment.id }}">
+                        <input type="button" value="Like" class="btn-primary" id="like-btn">
+                        <input type="button" value="Reply" class="btn-danger" id="reply-btn">
+                        {% endif %}
+
+                        <div id="reply-div" style="display: none;">
+
+                            {% for reply in comment.replies.all %}
+        
+                                <br><div class="panel panel-danger">
+                                    
+                                    <div>
+                                        <br><p>&nbsp&nbsp{{reply.comment_text}}</p>
+                                        <a href="{% url 'email-user-info' reply.user.email %}"><p class="text-primary">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp- {{reply.user.email}}</p></a>
+                                    </div>
+
+                                    <div>
+                                        <span class="text-secondary pull-right">{{reply.timestamp}}</span>
+                                    </div><br>
+
+                                </div>
+                    
+                            {% endfor %}
+
+                            <br><form action="." method="post" class="comment-form">
+                                {% csrf_token %}
+                                {{commentform|crispy}}
+                                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                                <input type="submit" value="Post reply" class= "btn-info">
+                            </form>
+                        </div>
+
+                        <p class="text-secondary pull-right">{{comment.timestamp}}</p>
+                    </div>
+
+                </div>
+
+            </div>
+        
+            {% endfor %}
+        </div>
+
+        <div class="panel-footer">
+            <h3>Leave your comment</h3>
+            <form action="." method="post" class="comment-form">
+                {% csrf_token %}
+                {{commentform|crispy}}
+                <input type="submit" value="Post comment" class= "btn btn-primary">
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<div class="row" id="msg">
+
+    {% if messages %}
+
+      {% for message in messages %}
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+
+      {% endfor %}
+
+    {% endif %}
+
+</div>
+
+<div class="container">
+
+    <div class="col-lg-4">
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="container-fluid">
+
+        </div><br><br>
+
+        <div class="container-fluid" style="background-color: skyblue; box-shadow: 5px 5px 7px 7px grey; border-radius: 4px;">
+            <div class="container-fluid">
+                <h3 style="font-size: 22px;"><strong><p class="text-center">Boostore Account Creation</p></strong></h3>
+            </div><br>   
+    
+            <form action="" method="POST">
+                {% csrf_token %}
+                
+                {% for field in form %}
+    
+                {% if field.errors %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{ field.label }}</label>
+    
+                    <div class="control">
+                        {{ field }}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                            <li><strong style="color: red;">{{ error }}</strong></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+    
+                {% else %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{field.label}}</label>
+                    <div class="control">
+                        {{ field }}
+                    </div>
+    
+                </div>
+    
+                {% endif %}
+    
+                {% endfor %}
+                
+                <div class="container-fluid">
+                    <button type="submit" class="form-control btn btn-primary" id="id_create">Create Bookstore Account</button>
+                </div><br>
+    
+                <div class="container-fluid">
+                    Already have an account? <a href="{% url 'user-signin-path' %}">Sign-in</a>
+                </div><br>
+                
+            </form>
+    
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+    </div>
+
+       
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'home.html' %}
+{% load static %}
+
+  <div class="container-fluid">
+
+    {% block content %}
+    
+    <div class="row" id="msg">
+
+        {% if messages %}
+  
+          {% for message in messages %}
+            <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ message }}
+            </div>
+
+          {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <div class="container-fluid">
+        <div class="col-sm-3">
+          
+          <div>
+            <h2>Comments</h2>
+          </div><br>
+          
+          <div>
+            {% for comment in comments %}
+              <p>{{comment}}</p>
+            {% endfor %}
+          </div><br><br>
+
+          <div>
+
+            <form action="" method="post">
+              <label for="">Post your comment</label>
+              <input type="text"><br><br>
+              <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+
+          </div>
+
+        </div>
+
+        <div class="col-sm-9">
+            
+            <br><br><br>
+            <div class="col-sm-4">
+                <img src="{{book.img.url}}" alt="" style="width: 250px; height: 250px;">
+            </div>
+    
+            <div class="col-sm-5">
+                <h3><strong>{{book.title}}</strong></h3>
+                <h5>{{book.description}}</h5>
+                <p class="text"><strong>&nbsp₹</strong>&nbsp{{book.price}}</p>
+                <p class="text">{{book.timestamp}}</p>
+            </div>
+
+            <div class="col-sm-3">
+                <h3>Posted by</h3>
+                <p><strong>{{user_obj.full_name}}</strong></p>
+                <img src="{{user_obj.img.url}}" class="rounded-circle z-depth-0" alt="" height="75"/>
+            </div>
+            
+        </div>
+
+    </div>
+
+    {% endblock %}
+
+  </div>
+
+</body>
+
+<script>
+  setTimeout(function(){
+      if ($('#msg').length > 0){
+          $('#msg').remove();
+      }
+  }, 5000)
+</script>
+
+</html>

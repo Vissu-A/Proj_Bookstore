@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+
+  {% if messages %}
+
+  {% for message in messages %}
+  <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+
+  {% endfor %}
+  
+  {% endif %}
+
+</div>
+
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+                <h3><strong>Login</strong></h3>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr class="table-success"></tr>
+            <th>
+                <h4><span class="glyphicon glyphicon-lock"></span><strong> Change password</strong></h4>
+                <p>Use a strong password for better security of your account.</p>
+                <a class="btn btn-primary pull-right" href="{% url 'password-change' %}">Change</a>
+            </th>
+          </tr>
+        
+    </table>
+</div>
+
+{% endblock %}

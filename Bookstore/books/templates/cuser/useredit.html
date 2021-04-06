@@ -1,0 +1,188 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<!-- <div class="container-fluid">
+
+        <div class="container-fluid">
+            <div class="container">
+                <h3 style="font-size: 22px;"><strong><p class="text-center">Update User Information</p></strong></h3>
+            </div><br>
+    
+            {% if messages %}
+    
+            {% for message in messages %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+    
+            {% endfor %}
+            
+            {% endif %}
+            
+    
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for field in form %}
+    
+                {% if field.errors %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{ field.label }}</label>
+    
+                    <div class="control">
+                        {{ field }}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                            <li><strong style="color: red;">{{ error }}</strong></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+    
+                {% else %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{field.label}}</label>
+                    <div class="control">
+                        {{ field }}
+                    </div>
+    
+                </div>
+    
+                {% endif %}
+    
+                {% endfor %}
+
+                <br><div class="container-fluid">
+                    <a class="btn btn-danger pull-right" href="{% url 'user-info-path' %}">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div><br><br>
+
+            </form>
+    
+        </div>
+
+        <script>
+            $(function() {
+              var date = new Date();  
+              var year = date.getFullYear();
+              $('#datepicker').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1900:year",
+              });
+
+            });
+        </script>
+
+</div> -->
+
+
+<div class="container-fluid">
+    
+    <div class="row" id="msg">
+
+        {% if messages %}
+    
+        {% for message in messages %}
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    <div class="row">
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="col-sm-3">
+
+                <div class="container" style="width: 250px; height: 250px">
+                    
+                    {% if user.img == '' %}
+
+                    <div class="container" style="width: 213px; height: 223px;">
+                        <img class="card-img-top" src="http://127.0.0.1:8000/media/dummy_profile.png" alt="Card image" style="width: 204px; height: 214px;">
+                    </div>
+    
+                    {% else %}
+
+                    <div class="container" style="width: 213px; height: 223px;">
+                        <img class="card-img-top" src="{{user.img.url}}" alt="Card image" style="width: 204px; height: 214px;">
+                    </div>
+                    
+                    {% endif %}    
+
+                    <div class="container" style="width: 20px;height: 21px;margin-left: 50px;padding-left: 0px;padding-right: 0px;margin-right: 0px;">   
+                        <input type="file" name="img" accept="image/*" id="id_img">
+                    </div>
+
+                </div>
+                
+            </div><br><br>
+
+            <div class="col-sm-7">
+                
+                {% for field in form %}
+        
+                {% if field.errors %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{ field.label }}</label>
+    
+                    <div class="control">
+                        {{ field }}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                            <li><strong style="color: red;">{{ error }}</strong></li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+    
+                {% else %}
+    
+                <div class="form-group">
+                    <label for="id_{{field.label}}" class="control-label">{{field.label}}</label>
+                    <div class="control">
+                        {{ field }}
+                    </div>
+    
+                </div>
+    
+                {% endif %}
+    
+                {% endfor %}
+
+                <br><div class="container-fluid">
+                    <button type="submit" class="btn btn-primary btn-md btn-block">Save</button>
+                    <a class="btn btn-danger btn-md btn-block" href="{% url 'user-info-path' %}">Cancel</a>
+                </div><br><br>
+            
+            </div>
+        
+        </form>
+
+    </div>
+
+    <script>
+        setTimeout(function(){
+            if ($('#msg').length > 0){
+                $('#msg').remove();
+            }
+        }, 5000)
+    </script>
+
+</div>
+
+
+{% endblock %}
