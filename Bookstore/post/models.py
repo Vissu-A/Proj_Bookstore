@@ -10,7 +10,7 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE)             # Mant-to-one relation (one user can have many posts, but one post will have only one user.)
     title = models.CharField(max_length=255, blank=False, null=False)
     description = models.TextField(blank=False, null=False)
-    img = models.ImageField(storage=S3Boto3Storage(bucket_name='book-post-images', region_name='us-east-2'))
+    img = models.ImageField(storage=S3Boto3Storage(bucket_name='bookstore-post-images', region_name='us-east-2'))
     timestamp = models.DateTimeField(default=timezone.now, blank=False, null=False)
 
     class Meta:

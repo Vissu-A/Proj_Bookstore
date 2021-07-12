@@ -230,14 +230,14 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Nairobi'
 
 # AWS S3 Service settings
-AWS_ACCESS_KEY_ID = 'AKIA4LOPDVENPYGBAXXZ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'bookstore-user-dp'
+AWS_ACCESS_KEY_ID = 'AKIA4UHBMKKHP26SYYNR'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'bookstore-user-profile-images'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_DEFAULT_ACL = None           # ACL means Access Control List. by default inherits the bucket permissions.
-AWS_S3_FILE_OVERWRITE = False    # By default files with the same name will overwrite each other. True by default.
-AWS_S3_REGION_NAME = 'us-east-2' #change to your region
+AWS_S3_FILE_OVERWRITE = True    # By default files with the same name will overwrite each other. True by default.
+AWS_S3_REGION_NAME = 'us-east-2' # change to your region
 
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'        # To serve static file like css, js from AWS S3.
 
@@ -299,3 +299,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'books', 'static', 'images')
 
 # Crispy forms pack
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# SameSite Cookie
+# SESSION_COOKIE_SAMESITE = None
+# CSRF_COOKIE_SAMESITE = None
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_SAVE_EVERY_REQUEST = True
