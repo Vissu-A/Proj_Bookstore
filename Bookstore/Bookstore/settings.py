@@ -230,8 +230,8 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Nairobi'
 
 # AWS S3 Service settings
-AWS_ACCESS_KEY_ID = 'AKIA4UHBMKKHP26SYYNR'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = '<paste iam programatic user access key id>'
+AWS_SECRET_ACCESS_KEY = '<paste iam programatic user access key>'
 AWS_STORAGE_BUCKET_NAME = 'bookstore-user-profile-images'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
