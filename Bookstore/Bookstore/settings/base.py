@@ -176,21 +176,6 @@ TEMPLATES = [
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'USER': 'vissu',
-        'PASSWORD': 'vissu',
-        'NAME': 'bookstore',
-        'OPTIONS': {
-            # 'read_default_file': os.path.join(BASE_DIR, 'my.cnf'),
-            'init_command': 'SET default_storage_engine=INNODB',
-        },
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -229,9 +214,10 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Africa/Nairobi'
 
+
 # AWS S3 Service settings
-AWS_ACCESS_KEY_ID = '<paste iam programatic user access key id>'
-AWS_SECRET_ACCESS_KEY = '<paste iam programatic user access key>'
+AWS_ACCESS_KEY_ID = 'AKIA4UHBMKKHP26SYYNR'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'bookstore-user-profile-images'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -240,6 +226,23 @@ AWS_S3_FILE_OVERWRITE = True    # By default files with the same name will overw
 AWS_S3_REGION_NAME = 'us-east-2' # change to your region
 
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'        # To serve static file like css, js from AWS S3.
+
+
+# For social all auth
+SITE_ID = 1
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL =True
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_LOGOUT_REDIRECT_URL = 'user-signin-path'
+SOCIALACCOUNT_AUTO_SIGNUP = True 
+
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 
 
 # Internationalization
@@ -268,22 +271,6 @@ LOGIN_REDIRECT_URL = 'set-user-password'
 
 # Web server gateway interface application
 WSGI_APPLICATION = 'Bookstore.wsgi.application'
-
-# For social all auth
-SITE_ID = 1
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_USER_MODEL_EMAIL_FIELD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL =True
-
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
-ACCOUNT_LOGOUT_ON_GET = True
-ACCOUNT_LOGOUT_REDIRECT_URL = 'user-signin-path'
-SOCIALACCOUNT_AUTO_SIGNUP = True 
-
-ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
 
 
 # Static files (CSS, JavaScript, Images)
