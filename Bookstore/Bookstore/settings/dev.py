@@ -18,3 +18,6 @@ DATABASES = {
         },
     }
 }
+
+# allauth creates redirect url in http by default, adding this line will make allauth create https  redirect urls
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https' 
