@@ -243,3 +243,8 @@ def user_password_change(request):
         form = CustomPasswordChangeForm(request.user)
     
     return render(request, 'cuser/password_change.html', {'form':form})
+
+
+
+def test_response(request):
+    return HttpResponse('Hello World!')

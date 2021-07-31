@@ -28,4 +28,6 @@ urlpatterns = [
 
     # Social auth url
     path('social-auth/', include('allauth.urls'), name='socialauth-signin-path'),
+
+    path('test/', views.test_response, name = 'test-response'),
 ]
