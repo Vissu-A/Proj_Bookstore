@@ -247,4 +247,4 @@ def user_password_change(request):
 
 
 def test_response(request):
-    return HttpResponse('Hello World to All')
+    return HttpResponse('Hello World!')
