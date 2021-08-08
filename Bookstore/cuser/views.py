@@ -57,17 +57,17 @@ def user_signup(request):
 
                     # get domain
                     domain = get_current_site(request).domain
-                    # print('###############################################')
-                    # print('domain is: ', domain)
-                    # print('###############################################')
+                    print('###############################################')
+                    print('domain is: ', domain)
+                    print('###############################################')
 
                     # construct activation link with uidb64, token
                     link = reverse('activate-account-path', kwargs={'uidb64': uidb64, 'token': token})
 
                     activation_link = 'http://'+domain+link
-                    # print('###############################################')
-                    # print('Activation link is: ', activation_link)
-                    # print('###############################################')
+                    print('###############################################')
+                    print('Activation link is: ', activation_link)
+                    print('###############################################')
 
                     task =  Account_Activate_Send_Mail.delay(emailid, fullname, activation_link)
                     print('Task ID is: ',task.task_id)
